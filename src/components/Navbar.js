@@ -24,6 +24,11 @@ const useStyles = makeStyles((theme) => ({
 function Navbar(props) {
   const classes = useStyles();
 
+  const handleLogout = () => {
+    props.logoutUser();
+    localStorage.removeItem("token");
+  };
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -33,7 +38,7 @@ function Navbar(props) {
           </Typography>
           {props.auth ? (
             <Link to="/login">
-              <Button onClick={props.logoutUser}>Logout</Button>
+              <Button onClick={handleLogout}>Logout</Button>
             </Link>
           ) : (
             <Link to="/login">
