@@ -3,6 +3,7 @@ import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
+import Results from "./components/Results";
 import "./App.css";
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <Switch>
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/login" component={Login} />
+          <Route path="/results" component={Results} />
         </Switch>
       </div>
     </Router>

@@ -1,9 +1,23 @@
-import React from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { currentUser } from "../actions/auth";
+import { fetchSuccess } from "../actions/professionals";
+import ResultsGrid from "../components/ResultsGrid";
+import SearchBar from "../components/SearchBar";
 
-class Dashboard extends React.Component {
+class Results extends Component {
   componentDidMount() {
+    this.checkForToken();
+    this.fetchProData();
+  }
+
+  fetchProData = () => {
+    fetch("http://localhost:3001/professionals")
+      .then((response) => response.json())
+      .then((response) => this.props.fetchSuccess(response.professionals));
+  };
+
+  checkForToken = () => {
     const token = localStorage.getItem("token");
 
     if (!token) {
@@ -26,12 +40,13 @@ class Dashboard extends React.Component {
           }
         });
     }
-  }
+  };
 
   render() {
     return (
       <div>
-        <h5>Dashboard</h5>
+        <SearchBar />
+        <ResultsGrid />
       </div>
     );
   }
@@ -40,7 +55,8 @@ class Dashboard extends React.Component {
 const mapStateToProps = (state) => {
   return {
     auth: state.auth,
+    professionals: state.professionals,
   };
 };
 
-export default connect(mapStateToProps, { currentUser })(Dashboard);
+export default connect(mapStateToProps, { currentUser, fetchSuccess })(Results);
