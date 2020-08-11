@@ -11,3 +11,10 @@ export const updateQuery = (query) => {
     query,
   };
 };
+
+export const updateFilter = (filter) => {
+  return {
+    type: "UPDATE_FILTER",
+    filter,
+  };
+};

@@ -1,23 +1,28 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
 import { connect } from "react-redux";
+import { AppBar, Toolbar, Button, makeStyles } from "@material-ui/core";
 import { logoutUser } from "../actions/auth";
+import Logo from "../logo.png";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    borderBottom: "1px solid #e9eced",
+    marginBottom: 20,
   },
   menuButton: {
     marginRight: theme.spacing(2),
   },
-  title: {
+  logo: {
     flexGrow: 1,
+  },
+  navBar: {
+    backgroundColor: "white",
+  },
+  button: {
+    backgroundColor: "#009fd9",
+    color: "white",
   },
 }));
 
@@ -31,19 +36,48 @@ function Navbar(props) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" elevation={0} className={classes.navBar}>
         <Toolbar>
-          <Typography variant="h6" className={classes.title}>
-            ServiTodo
-          </Typography>
+          <Link to="/dashboard" className={classes.logo}>
+            <img width="50" height="50" src={Logo} />
+          </Link>
+
           {props.auth ? (
-            <Link to="/login">
-              <Button onClick={handleLogout}>Logout</Button>
-            </Link>
+            <div>
+              <Button
+                component={Link}
+                to="/jobs"
+                className={classes.menuButton}
+              >
+                Active Jobs
+              </Button>
+
+              <Button
+                className={classes.button}
+                variant="contained"
+                onClick={handleLogout}
+              >
+                Logout
+              </Button>
+            </div>
           ) : (
-            <Link to="/login">
-              <Button>Login</Button>
-            </Link>
+            <div>
+              <Button
+                className={classes.button}
+                variant="contained"
+                href="/register"
+                style={{ marginRight: 10 }}
+              >
+                Register
+              </Button>
+              <Button
+                className={classes.button}
+                variant="contained"
+                href="/login"
+              >
+                Login
+              </Button>
+            </div>
           )}
         </Toolbar>
       </AppBar>

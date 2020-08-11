@@ -1,9 +1,22 @@
 import React from "react";
 import { connect } from "react-redux";
 import { currentUser } from "../actions/auth";
+import SearchBar from "../components/SearchBar";
+import {
+  Button,
+  Container,
+  Typography,
+  Grid,
+  CssBaseline,
+} from "@material-ui/core";
+import SearchIcon from "@material-ui/icons/Search";
 
 class Dashboard extends React.Component {
   componentDidMount() {
+    this.checkForToken();
+  }
+
+  checkForToken = () => {
     const token = localStorage.getItem("token");
 
     if (!token) {
@@ -26,13 +39,46 @@ class Dashboard extends React.Component {
           }
         });
     }
-  }
+  };
 
   render() {
     return (
-      <div>
-        <h5>Dashboard</h5>
-      </div>
+      <Container maxWidth="md" style={{ marginTop: 200 }}>
+        <CssBaseline />
+        <Grid container spacing={2}>
+          <Grid container>
+            <Grid item xs={8}>
+              <Typography variant="h4" style={{ fontWeight: "bold" }}>
+                Find local professionals for
+              </Typography>
+              <Typography
+                variant="h4"
+                style={{ fontWeight: "bold", marginBottom: 15 }}
+              >
+                pretty much anything 🛠️
+              </Typography>
+              <SearchBar />
+            </Grid>
+
+            <Grid item>
+              <Button
+                size="large"
+                variant="contained"
+                onClick={() => this.props.history.push("/professionals")}
+                style={{
+                  backgroundColor: "#009fd9",
+                  color: "white",
+                  display: "inline",
+                  marginTop: 100,
+                  marginLeft: 20,
+                }}
+              >
+                <SearchIcon />
+              </Button>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Container>
     );
   }
 }

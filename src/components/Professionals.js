@@ -2,10 +2,18 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { currentUser } from "../actions/auth";
 import { fetchSuccess } from "../actions/professionals";
-import ResultsGrid from "../components/ResultsGrid";
-import SearchBar from "../components/SearchBar";
+import ResultsGrid from "./ResultsGrid";
+import RadioFilters from "./RadioFilters";
+import SearchBar from "./SearchBar";
+import {
+  CircularProgress,
+  Grid,
+  Paper,
+  Typography,
+  CssBaseline,
+} from "@material-ui/core";
 
-class Results extends Component {
+class Professionals extends Component {
   componentDidMount() {
     this.checkForToken();
     this.fetchProData();
@@ -32,11 +40,11 @@ class Results extends Component {
 
       fetch("http://localhost:3001/current_user", reqObj)
         .then((response) => response.json())
-        .then((response) => {
-          if (response.error) {
+        .then((user) => {
+          if (user.error) {
             this.props.history.push("/login");
           } else {
-            this.props.currentUser(response);
+            this.props.currentUser(user);
           }
         });
     }
@@ -44,10 +52,28 @@ class Results extends Component {
 
   render() {
     return (
-      <div>
-        <SearchBar />
-        <ResultsGrid />
-      </div>
+      <React.Fragment>
+        <CssBaseline />
+        <Grid container spacing={2} style={{ padding: 10 }}>
+          <Grid item xs={2}>
+            <div style={{ marginBottom: 20 }}>
+              <SearchBar />
+            </div>
+
+            <Paper style={{ padding: 15 }}>
+              <Typography>Sort by:</Typography>
+              <RadioFilters />
+            </Paper>
+          </Grid>
+          <Grid item xs={8}>
+            {this.props.auth ? (
+              <ResultsGrid history={this.props.history} />
+            ) : (
+              <CircularProgress />
+            )}
+          </Grid>
+        </Grid>
+      </React.Fragment>
     );
   }
 }
@@ -59,4 +85,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { currentUser, fetchSuccess })(Results);
+export default connect(mapStateToProps, { currentUser, fetchSuccess })(
+  Professionals
+);

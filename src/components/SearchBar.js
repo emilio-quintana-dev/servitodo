@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 //                     UI Components
 // ---------------x--------------------x---------------
-import { InputBase } from "@material-ui/core";
+import { TextField, Button } from "@material-ui/core";
 //                        Actions
 // ---------------x--------------------x---------------
 import { updateQuery } from "../actions/professionals";
@@ -30,11 +30,13 @@ class SearchBar extends Component {
 
   render() {
     return (
-      <InputBase
+      <TextField
+        variant="outlined"
         name="query"
-        placeholder="Search…"
+        placeholder="What's on your to-do list ?"
         inputProps={{ "aria-label": "search" }}
         onChange={this.handleChange}
+        style={{ width: "100%", backgroundColor: "white" }}
       />
     );
   }

@@ -1,46 +1,60 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
 import ProCard from "../components/ProCard";
 import { connect } from "react-redux";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-  },
-}));
-
 function ResultsGrid(props) {
+  const calculateRange = (userZipCode) => {
+    return [
+      userZipCode - 2,
+      userZipCode - 1,
+      userZipCode,
+      userZipCode + 1,
+      userZipCode + 2,
+    ];
+  };
+
   const renderProCards = () => {
+    let zipCodeRange = calculateRange(props.auth.zip_code);
+
+    //      Filter by User's Zip Code
+    // ----------x------------x------------
     let filteredPros = props.professionals.filter(
-      (professional) => professional.zip_code == props.auth.zip_code
+      (professional) =>
+        professional.zip_code == zipCodeRange[0] ||
+        professional.zip_code == zipCodeRange[1] ||
+        professional.zip_code == zipCodeRange[2] ||
+        professional.zip_code == zipCodeRange[3] ||
+        professional.zip_code == zipCodeRange[4]
     );
 
+    //         Filter by keyword
+    //----------x------------x------------
     filteredPros = filteredPros.filter((professional) =>
       professional.introduction.includes(props.query)
     );
 
-    if (filteredPros.lenght !== 0) {
+    //         Check for Filter
+    //----------x------------x------------
+    if (props.filter === "distance") {
+      filteredPros = filteredPros.sort((a, b) =>
+        a.zip_code > b.zip_code ? 1 : -1
+      );
+    }
+
+    if (filteredPros.length !== 0) {
       return filteredPros.map((professional, idx) => {
-        return <ProCard professional={professional} key={idx} />;
+        return (
+          <ProCard
+            professional={professional}
+            key={idx}
+            history={props.history}
+          />
+        );
       });
     }
   };
 
-  const classes = useStyles();
-
-  return (
-    <div className={classes.root}>
-      <Grid container spacing={3}>
-        {renderProCards()}
-      </Grid>
-    </div>
-  );
+  return <div>{renderProCards()}</div>;
 }
 
 const mapStateToProps = (state) => {
@@ -48,6 +62,7 @@ const mapStateToProps = (state) => {
     auth: state.auth,
     professionals: state.professionals,
     query: state.query,
+    filter: state.filter,
   };
 };
 

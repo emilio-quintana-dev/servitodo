@@ -1,21 +1,21 @@
 import React from "react";
 import { CssBaseline, Typography, Container } from "@material-ui/core";
-import LoginCard from "../components/LoginCard";
+import RegisterCard from "../components/RegisterCard";
 
-class Login extends React.Component {
+class Register extends React.Component {
   render() {
     return (
       <React.Fragment>
         <CssBaseline />
         <Container maxWidth="sm">
           <Typography variant="h4" style={{ textAlign: "center" }}>
-            Welcome Back
+            Create your account
           </Typography>
-          <LoginCard history={this.props.history} />
+          <RegisterCard history={this.props.history} />
         </Container>
       </React.Fragment>
     );
   }
 }
 
-export default Login;
+export default Register;
