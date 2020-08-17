@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { FormGroup, TextField, Button } from "@material-ui/core";
-import SearchIcon from "@material-ui/icons/Search";
 
 class JobForm extends Component {
   state = {
@@ -56,7 +55,7 @@ class JobForm extends Component {
           variant="contained"
           onClick={this.handleSubmit}
           style={{
-            backgroundColor: "#009fd9",
+            backgroundColor: "#4CAF50",
             color: "white",
             marginBottom: 20,
           }}

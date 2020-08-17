@@ -20,24 +20,36 @@ function ResultsGrid(props) {
     // ----------x------------x------------
     let filteredPros = props.professionals.filter(
       (professional) =>
-        professional.zip_code == zipCodeRange[0] ||
-        professional.zip_code == zipCodeRange[1] ||
-        professional.zip_code == zipCodeRange[2] ||
-        professional.zip_code == zipCodeRange[3] ||
-        professional.zip_code == zipCodeRange[4]
+        professional.zip_code === zipCodeRange[0] ||
+        professional.zip_code === zipCodeRange[1] ||
+        professional.zip_code === zipCodeRange[2] ||
+        professional.zip_code === zipCodeRange[3] ||
+        professional.zip_code === zipCodeRange[4]
     );
 
     //         Filter by keyword
     //----------x------------x------------
-    filteredPros = filteredPros.filter((professional) =>
-      professional.introduction.includes(props.query)
-    );
+    filteredPros = filteredPros.filter((professional) => {
+      let lowerCaseIntro = professional.introduction.toLowerCase();
+      let lowerCaseQuery = props.query.toLowerCase();
+
+      if (
+        lowerCaseIntro.includes(lowerCaseQuery) ||
+        lowerCaseIntro.includes(lowerCaseQuery + "s")
+      ) {
+        return professional;
+      }
+    });
 
     //         Check for Filter
     //----------x------------x------------
     if (props.filter === "distance") {
       filteredPros = filteredPros.sort((a, b) =>
         a.zip_code > b.zip_code ? 1 : -1
+      );
+    } else if (props.filter === "price") {
+      filteredPros = filteredPros.sort((a, b) =>
+        a.estimated_cost > b.estimated_cost ? 1 : -1
       );
     }
 

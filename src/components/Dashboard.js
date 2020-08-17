@@ -8,8 +8,10 @@ import {
   Typography,
   Grid,
   CssBaseline,
+  Divider,
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
+import WelcomeSnackbar from "../components/WelcomeSnackbar";
 
 class Dashboard extends React.Component {
   componentDidMount() {
@@ -43,39 +45,96 @@ class Dashboard extends React.Component {
 
   render() {
     return (
-      <Container maxWidth="md" style={{ marginTop: 200 }}>
+      <Container maxWidth="lg" style={{ marginTop: 80 }}>
+        <WelcomeSnackbar />
         <CssBaseline />
-        <Grid container spacing={2}>
-          <Grid container>
-            <Grid item xs={8}>
-              <Typography variant="h4" style={{ fontWeight: "bold" }}>
-                Find local professionals for
-              </Typography>
-              <Typography
-                variant="h4"
-                style={{ fontWeight: "bold", marginBottom: 15 }}
-              >
-                pretty much anything 🛠️
-              </Typography>
-              <SearchBar />
-            </Grid>
+        <Typography
+          variant="h6"
+          style={{
+            borderBottom: "2px solid #4CAF50",
+            width: 80,
+            fontFamily: "Montserrat",
+            fontSize: "15px",
+            marginBottom: 10,
+          }}
+        >
+          Hire a pro
+        </Typography>
 
-            <Grid item>
-              <Button
-                size="large"
-                variant="contained"
-                onClick={() => this.props.history.push("/professionals")}
-                style={{
-                  backgroundColor: "#009fd9",
-                  color: "white",
-                  display: "inline",
-                  marginTop: 100,
-                  marginLeft: 20,
-                }}
-              >
-                <SearchIcon />
-              </Button>
-            </Grid>
+        <Grid container>
+          <Grid item xs={10}>
+            <Typography variant="h3" style={{ fontFamily: "Montserrat" }}>
+              Find local professionals for
+            </Typography>
+            <Typography
+              variant="h3"
+              style={{ marginBottom: 30, fontFamily: "Montserrat" }}
+            >
+              pretty much everything.
+            </Typography>
+            <SearchBar />
+
+            <Button
+              style={{
+                backgroundColor: "#4CAF50",
+                color: "white",
+                margin: 20,
+                padding: 10,
+              }}
+            >
+              Personal Trainers
+            </Button>
+
+            <Button
+              style={{
+                backgroundColor: "#4CAF50",
+                color: "white",
+                margin: 20,
+                padding: 10,
+              }}
+            >
+              Electricians
+            </Button>
+
+            <Button
+              style={{
+                backgroundColor: "#4CAF50",
+                color: "white",
+                margin: 20,
+                padding: 10,
+              }}
+            >
+              App Developers
+            </Button>
+
+            <Button
+              style={{
+                backgroundColor: "#4CAF50",
+                color: "white",
+                margin: 20,
+                padding: 10,
+              }}
+            >
+              House Cleaners
+            </Button>
+          </Grid>
+
+          <Grid item>
+            <Button
+              size="large"
+              variant="contained"
+              onClick={() => this.props.history.push("/results")}
+              style={{
+                backgroundColor: "#4CAF50",
+                color: "white",
+                display: "inline",
+                marginTop: 142,
+                height: 55,
+                marginLeft: 10,
+              }}
+            >
+              <SearchIcon />
+            </Button>
           </Grid>
         </Grid>
       </Container>

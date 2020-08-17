@@ -1,7 +1,6 @@
 import React from "react";
 import emailjs from "emailjs-com";
-import { IconButton } from "@material-ui/core";
-import EmailIcon from "@material-ui/icons/Email";
+import { Button } from "@material-ui/core";
 
 export default function EmailPro(props) {
   const { message, email } = props;
@@ -19,10 +18,13 @@ export default function EmailPro(props) {
   }
 
   return (
-    <div>
-      <IconButton aria-label="email" onClick={sendEmail}>
-        <EmailIcon fontSize="large" />
-      </IconButton>
-    </div>
+    <Button
+      size="large"
+      style={{ backgroundColor: "#4CAF50", color: "white", marginBottom: 20 }}
+      variant="contained"
+      onClick={sendEmail}
+    >
+      Send
+    </Button>
   );
 }

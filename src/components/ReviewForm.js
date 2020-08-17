@@ -3,19 +3,20 @@
 import React, { Component } from "react";
 //    Store Actions
 //----------x----------x---------
-import { loginSuccess } from "../actions/auth";
-import { connect } from "react-redux";
+// import { loginSuccess } from "../actions/auth";
+// import { connect } from "react-redux";
 //    UI Components
 //----------x----------x---------
 import { FormGroup, TextField, Button } from "@material-ui/core";
 
-class LoginForm extends Component {
-  constructor() {
-    super();
+import { connect } from "react-redux";
+
+class ReviewForm extends Component {
+  constructor(props) {
+    super(props);
     this.state = {
-      email: "",
-      password: "",
-      error: "No errors yet:D",
+      content: "",
+      rating: "",
     };
   }
 
@@ -27,60 +28,50 @@ class LoginForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+
+    const jobId = this.props.match.params.jobId;
+
     const reqObj = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        email: this.state.email,
-        password: this.state.password,
+        id: jobId,
+        content: this.state.content,
+        rating: this.state.rating,
       }),
     };
 
-    fetch("http://localhost:3001/auth", reqObj)
+    fetch("http://localhost:3001/reviews", reqObj)
       .then((resp) => resp.json())
       .then((data) => {
         if (data.error) {
-          this.setState({
-            email: "",
-            password: "",
-            error: "Invalid Username or password",
-          });
+          alert(data.error);
         } else {
-          localStorage.setItem("token", data.token);
-          this.props.loginSuccess(data);
-          this.props.history.push("/search");
+          this.props.history.push("/jobs");
         }
       });
   };
 
   render() {
     const textfieldStyle = { paddingBottom: 20 };
-
     return (
       <FormGroup style={{ textAlign: "center" }}>
         <TextField
           autoFocus
-          value={this.state.email}
-          error={this.state.error === "Invalid Username or password"}
           type="text"
-          name="email"
-          label="Email"
+          name="content"
+          label="Content"
           variant="outlined"
+          placeholder="Write your honest comments here"
           onChange={this.handleChange}
           style={textfieldStyle}
         />
 
         <TextField
-          error={this.state.error === "Invalid Username or password"}
-          helperText={
-            this.state.error === "Invalid Username or password"
-              ? "Invalid Username or Password"
-              : null
-          }
-          value={this.state.password}
-          type="password"
-          name="password"
-          label="Password"
+          helperText="Rating must be a number between 1 and 5"
+          type="number"
+          name="rating"
+          label="Rating"
           variant="outlined"
           onChange={this.handleChange}
           style={textfieldStyle}
@@ -94,11 +85,17 @@ class LoginForm extends Component {
           onClick={this.handleSubmit}
           style={{ backgroundColor: "#4CAF50" }}
         >
-          Log in
+          Submit Review
         </Button>
       </FormGroup>
     );
   }
 }
 
-export default connect(null, { loginSuccess })(LoginForm);
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth,
+  };
+};
+
+export default connect(mapStateToProps, null)(ReviewForm);

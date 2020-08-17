@@ -3,13 +3,8 @@ import { connect } from "react-redux";
 import { currentUser } from "../actions/auth";
 import { Container, Typography } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
-import EmojiEventsIcon from "@material-ui/icons/EmojiEvents";
-import WorkIcon from "@material-ui/icons/Work";
-import LocationOnIcon from "@material-ui/icons/LocationOn";
-import profilePic from "../profile.jpeg";
 import { Button } from "@material-ui/core";
 import Review from "../components/Review";
-import StarIcon from "@material-ui/icons/Star";
 import JobForm from "../components/JobForm.js";
 import ContactForm from "../components/ContactForm.js";
 class ShowPro extends Component {
@@ -73,128 +68,45 @@ class ShowPro extends Component {
 
   renderStars = (rating) => {
     switch (rating) {
+      case 0:
+        return <Typography>New to Servitodo</Typography>;
       case 1:
         return (
-          <div>
-            <Typography
-              variant="h6"
-              style={{ display: "inline-block", color: "#4CAF50" }}
-            >
-              Regular
-            </Typography>
-            <StarIcon
-              fontSize="small"
-              style={{ color: "#4CAF50", paddingTop: 5 }}
-            />
-          </div>
+          <Typography>
+            <span>⭐</span> Getting Started
+          </Typography>
         );
 
       case 2:
         return (
-          <div>
-            <Typography
-              variant="h6"
-              style={{ display: "inline-block", color: "#4CAF50" }}
-            >
-              Good
-            </Typography>
-            <StarIcon
-              fontSize="small"
-              style={{ color: "#4CAF50", paddingTop: 5 }}
-            />
-            <StarIcon
-              fontSize="small"
-              style={{ color: "#4CAF50", paddingTop: 5 }}
-            />
-          </div>
+          <Typography>
+            <span>⭐⭐</span>Good
+          </Typography>
         );
 
       case 3:
         return (
-          <div>
-            <Typography
-              variant="h6"
-              style={{ display: "inline-block", color: "#4CAF50" }}
-            >
-              Very Good
-            </Typography>
-            <StarIcon
-              fontSize="small"
-              style={{ color: "#4CAF50", paddingTop: 5 }}
-            />
-            <StarIcon
-              fontSize="small"
-              style={{ color: "#4CAF50", paddingTop: 5 }}
-            />
-            <StarIcon
-              fontSize="small"
-              style={{ color: "#4CAF50", paddingTop: 5 }}
-            />
-          </div>
+          <Typography>
+            <span>⭐⭐⭐</span> Very Good
+          </Typography>
         );
 
       case 4:
         return (
-          <div>
-            <Typography
-              variant="h6"
-              style={{ display: "inline-block", color: "#4CAF50" }}
-            >
-              Excellent
-            </Typography>
-            <StarIcon
-              fontSize="small"
-              style={{ color: "#4CAF50", paddingTop: 5 }}
-            />
-            <StarIcon
-              fontSize="small"
-              style={{ color: "#4CAF50", paddingTop: 5 }}
-            />
-            <StarIcon
-              fontSize="small"
-              style={{ color: "#4CAF50", paddingTop: 5 }}
-            />
-            <StarIcon
-              fontSize="small"
-              style={{ color: "#4CAF50", paddingTop: 5 }}
-            />
-          </div>
+          <Typography>
+            <span>⭐⭐⭐⭐</span> Excellent
+          </Typography>
         );
 
       case 5:
         return (
-          <div>
-            <Typography
-              variant="h6"
-              style={{ display: "inline-block", color: "#4CAF50" }}
-            >
-              Excellent
-            </Typography>
-            <StarIcon
-              fontSize="small"
-              style={{ color: "#4CAF50", paddingTop: 5 }}
-            />
-            <StarIcon
-              fontSize="small"
-              style={{ color: "#4CAF50", paddingTop: 5 }}
-            />
-            <StarIcon
-              fontSize="small"
-              style={{ color: "#4CAF50", paddingTop: 5 }}
-            />
-            <StarIcon
-              fontSize="small"
-              style={{ color: "#4CAF50", paddingTop: 5 }}
-            />
-            <StarIcon
-              fontSize="small"
-              style={{ color: "#4CAF50", paddingTop: 5 }}
-            />
-          </div>
+          <Typography>
+            <span>⭐⭐⭐⭐⭐</span> Exceptional
+          </Typography>
         );
 
       default:
-        return null;
+        return <Typography>No reviews yet.</Typography>;
     }
   };
 
@@ -214,14 +126,14 @@ class ShowPro extends Component {
 
   render() {
     const {
-      first_name,
-      last_name,
+      name,
       introduction,
       time_in_bussiness,
       times_hired,
       zip_code,
       average_reviews,
       estimated_cost,
+      img_url,
     } = this.state.professional;
 
     return (
@@ -234,46 +146,32 @@ class ShowPro extends Component {
                 height="256"
                 alt="complex"
                 style={{ borderRadius: "50%", margin: "20px" }}
-                src={profilePic}
+                src={img_url}
               />
             </Grid>
             <Grid item xs={12} sm container>
               <Grid item xs={8} container direction="column" spacing={1}>
                 <Grid item>
-                  <Typography variant="h4">
-                    {" "}
-                    {first_name + " " + last_name}
+                  <Typography variant="h4"> {name}</Typography>
+                </Grid>
+
+                <Grid item>{this.renderStars(average_reviews)}</Grid>
+
+                <Grid item>
+                  <Typography>
+                    💼 {time_in_bussiness} years in business
                   </Typography>
                 </Grid>
 
                 <Grid item>
-                  <Typography variant="body2" color="textSecondary">
-                    {this.renderStars(average_reviews)}
-                  </Typography>
+                  <Typography>📍 Serves in {zip_code}</Typography>
                 </Grid>
 
                 <Grid item>
-                  <WorkIcon size="md" />
-                  <Typography style={{ display: "inline-block" }}>
-                    {time_in_bussiness} years in business
-                  </Typography>
+                  <Typography>🏆 {times_hired} hires on Servitodo</Typography>
                 </Grid>
 
-                <Grid item>
-                  <LocationOnIcon size="md" />
-                  <Typography style={{ display: "inline-block" }}>
-                    Serves in {zip_code}
-                  </Typography>
-                </Grid>
-
-                <Grid item>
-                  <EmojiEventsIcon size="md" />{" "}
-                  <Typography style={{ display: "inline-block" }}>
-                    {times_hired} hires on Servitodo
-                  </Typography>
-                </Grid>
-
-                <Grid item>
+                <Grid item style={{ marginTop: 50 }}>
                   <Button
                     onClick={this.toggleJobForm}
                     variant="contained"
@@ -315,15 +213,39 @@ class ShowPro extends Component {
             ) : null}
 
             {this.state.showContactForm ? (
-              <ContactForm email={this.state.professional.email} />
+              <ContactForm
+                toggleContactForm={this.toggleContactForm}
+                email={this.state.professional.email}
+              />
             ) : null}
 
-            <Typography variant="h5">Introduction:</Typography>
-            <Typography variant="body1">{introduction}</Typography>
+            <br />
+            <Typography variant="h6" style={{ fontWeight: "bold" }}>
+              Introduction:
+            </Typography>
+            <Typography variant="body1" style={{ fontSize: 15 }}>
+              {introduction}
+            </Typography>
+            <br />
             <br />
 
-            <Typography variant="h5">Reviews:</Typography>
-            <Typography variant="body1">{this.renderReviews()}</Typography>
+            {this.state.reviews.length > 0 ? (
+              <div>
+                <Typography variant="h6" style={{ fontWeight: "bold" }}>
+                  Reviews:
+                </Typography>
+                <Typography variant="body1" style={{ marginBottom: 100 }}>
+                  {this.renderReviews()}
+                </Typography>
+              </div>
+            ) : (
+              <Typography
+                variant="h6"
+                style={{ fontWeight: "bold", color: "grey", marginBottom: 100 }}
+              >
+                No reviews yet
+              </Typography>
+            )}
           </Grid>
         </Container>
       </React.Fragment>

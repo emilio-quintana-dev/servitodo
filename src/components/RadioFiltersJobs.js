@@ -21,7 +21,7 @@ const GreenRadio = withStyles({
   checked: {},
 })((props) => <Radio color="default" {...props} />);
 
-function RadioFilters(props) {
+function RadioFiltersJobs(props) {
   const [value, setValue] = React.useState("all");
 
   const handleChange = (event) => {
@@ -53,4 +53,4 @@ function RadioFilters(props) {
   );
 }
 
-export default connect(null, { updateFilter })(RadioFilters);
+export default connect(null, { updateFilter })(RadioFiltersJobs);

@@ -33,10 +33,14 @@ class SearchBar extends Component {
       <TextField
         variant="outlined"
         name="query"
-        placeholder="What's on your to-do list ?"
+        placeholder={this.props.query == "" ? "Search" : this.props.query}
+        value={this.state.query}
         inputProps={{ "aria-label": "search" }}
         onChange={this.handleChange}
-        style={{ width: "100%", backgroundColor: "white" }}
+        style={{
+          width: "100%",
+          backgroundColor: "white",
+        }}
       />
     );
   }

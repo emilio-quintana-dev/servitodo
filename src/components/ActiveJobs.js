@@ -1,16 +1,27 @@
+//    Necessary Imports
+//----------x----------x---------
 import React, { Component } from "react";
+//    Store Actions
+//----------x----------x---------
 import { connect } from "react-redux";
 import { currentUser } from "../actions/auth";
+//    UI Components
+//----------x----------x---------
 import {
-  Container,
   Typography,
   CircularProgress,
   CssBaseline,
   Grid,
   Paper,
 } from "@material-ui/core";
+//    Custom Components
+//----------x----------x---------
 import ActiveJobCard from "../components/ActiveJobCard";
-
+import RadioFilters from "../components/RadioFilters";
+//    Under Construction: Users will be able
+//    to mark jobs as done, leave a review and
+//    pay the pro.
+//----------x----------x---------
 class ActiveJobs extends Component {
   constructor() {
     super();
@@ -29,26 +40,6 @@ class ActiveJobs extends Component {
       this.fetchJobsData();
     }
   }
-
-  fetchJobsData = () => {
-    if (this.props.auth) {
-      const userId = this.props.auth.id;
-
-      fetch(`http://localhost:3001/jobs/${userId}`)
-        .then((response) => response.json())
-        .then((response) => this.setState({ activeJobs: response.jobs }));
-    }
-  };
-
-  renderActiveJobs = () => {
-    return this.state.activeJobs.map((job, idx) => {
-      return (
-        <Paper style={{ padding: 20 }}>
-          <ActiveJobCard job={job} key={idx} />
-        </Paper>
-      );
-    });
-  };
 
   checkForToken = () => {
     const token = localStorage.getItem("token");
@@ -74,6 +65,23 @@ class ActiveJobs extends Component {
         });
     }
   };
+
+  fetchJobsData = () => {
+    if (this.props.auth) {
+      const userId = this.props.auth.id;
+
+      fetch(`http://localhost:3001/users/${userId}/jobs`)
+        .then((response) => response.json())
+        .then((response) => this.setState({ activeJobs: response }));
+    }
+  };
+
+  renderActiveJobs = () => {
+    return this.state.activeJobs.map((job, idx) => {
+      return <ActiveJobCard job={job} key={idx} />;
+    });
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -81,13 +89,14 @@ class ActiveJobs extends Component {
         <Typography variant="h4" style={{ textAlign: "center" }}>
           Active Jobs
         </Typography>
-        <Grid container spacing={2} style={{ padding: 10 }}>
+        <Grid container style={{ padding: "1.5%" }} spacing={2}>
           <Grid item xs={2}>
-            <Paper style={{ padding: 15 }}>
+            <Paper style={{ padding: 20 }}>
               <Typography>Sort by:</Typography>
+              <RadioFilters />
             </Paper>
           </Grid>
-          <Grid item xs={8}>
+          <Grid item xs={10}>
             {this.props.auth ? this.renderActiveJobs() : <CircularProgress />}
           </Grid>
         </Grid>

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { FormGroup, TextField, Button } from "@material-ui/core";
+import { FormGroup, TextField } from "@material-ui/core";
 import EmailPro from "../components/EmailPro";
 
 class ContactForm extends Component {
@@ -12,8 +12,6 @@ class ContactForm extends Component {
       [e.target.name]: e.target.value,
     });
   };
-
-  handleSubmit = () => {};
 
   render() {
     return (

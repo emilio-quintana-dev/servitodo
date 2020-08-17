@@ -5,6 +5,7 @@ import { fetchSuccess } from "../actions/professionals";
 import ResultsGrid from "./ResultsGrid";
 import RadioFilters from "./RadioFilters";
 import SearchBar from "./SearchBar";
+import ZipCodeSnackbar from "./ZipCodeSnackbar";
 import {
   CircularProgress,
   Grid,
@@ -13,7 +14,7 @@ import {
   CssBaseline,
 } from "@material-ui/core";
 
-class Professionals extends Component {
+class Results extends Component {
   componentDidMount() {
     this.checkForToken();
     this.fetchProData();
@@ -54,18 +55,22 @@ class Professionals extends Component {
     return (
       <React.Fragment>
         <CssBaseline />
-        <Grid container spacing={2} style={{ padding: 10 }}>
+        {this.props.auth ? (
+          <ZipCodeSnackbar zipCode={this.props.auth.zip_code} />
+        ) : null}
+
+        <Grid container spacing={2} style={{ padding: "1.5%" }}>
           <Grid item xs={2}>
             <div style={{ marginBottom: 20 }}>
               <SearchBar />
             </div>
 
-            <Paper style={{ padding: 15 }}>
+            <Paper style={{ padding: 20 }}>
               <Typography>Sort by:</Typography>
               <RadioFilters />
             </Paper>
           </Grid>
-          <Grid item xs={8}>
+          <Grid item xs={10}>
             {this.props.auth ? (
               <ResultsGrid history={this.props.history} />
             ) : (
@@ -85,6 +90,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { currentUser, fetchSuccess })(
-  Professionals
-);
+export default connect(mapStateToProps, { currentUser, fetchSuccess })(Results);

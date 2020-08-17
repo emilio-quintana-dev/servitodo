@@ -1,5 +1,11 @@
+//    Necessary Imports
+//----------x----------x---------
 import React from "react";
+//    UI Components
+//----------x----------x---------
 import { CssBaseline, Typography, Container } from "@material-ui/core";
+//    Custom Components
+//----------x----------x---------
 import RegisterCard from "../components/RegisterCard";
 
 class Register extends React.Component {

@@ -1,5 +1,11 @@
+//    Necessary Imports
+//----------x----------x---------
 import React, { Component } from "react";
+//    UI Components
+//----------x----------x---------
 import { FormGroup, TextField, Button } from "@material-ui/core";
+//    Store Actions
+//----------x----------x---------
 import { loginSuccess } from "../actions/auth";
 import { connect } from "react-redux";
 
@@ -8,16 +14,16 @@ class RegisterForm extends Component {
     super();
 
     this.state = {
-      first_name: "",
-      last_name: "",
+      name: "",
       email: "",
       password: "",
       password_confirmation: "",
-      zip_code: 0,
+      zip_code: "",
+      error: "",
     };
   }
 
-  handleInputChange = (e) => {
+  handleChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value,
     });
@@ -29,97 +35,106 @@ class RegisterForm extends Component {
     const reqObj = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(this.state),
+      body: JSON.stringify({
+        name: this.state.name,
+        email: this.state.email,
+        password: this.state.password,
+        password_confirmation: this.state.password_confirmation,
+        zip_code: this.state.zip_code,
+      }),
     };
 
     fetch("http://localhost:3001/register", reqObj)
       .then((resp) => resp.json())
       .then((data) => {
         if (data.error) {
-          alert(data.error);
+          this.setState({
+            name: "",
+            email: "",
+            password: "",
+            password_confirmation: "",
+            zip_code: "",
+            error: "",
+            error: "Input error, please check your data.",
+          });
         } else {
           localStorage.setItem("token", data.token);
           this.props.loginSuccess(data);
-          this.props.history.push("/dashboard");
-          console.log(data);
+          this.props.history.push("/");
         }
       });
   };
   render() {
-    const textfieldStyle = { paddingBottom: 20 };
+    const textfieldStyle = {
+      paddingBottom: 20,
+    };
     return (
       <FormGroup>
         <TextField
           autoFocus
-          id="outlined-basic"
-          label="First Name"
+          error={this.state.error === "Input error, please check your data."}
+          label="Name"
           variant="outlined"
-          name="first_name"
-          onChange={this.handleInputChange}
-          value={this.state.first_name}
+          name="name"
+          onChange={this.handleChange}
           style={textfieldStyle}
         />
 
         <TextField
-          id="outlined-basic"
           label="Last Name"
+          error={this.state.error === "Input error, please check your data."}
           variant="outlined"
           name="last_name"
-          onChange={this.handleInputChange}
-          value={this.state.last_name}
+          onChange={this.handleChange}
           style={textfieldStyle}
         />
 
         <TextField
-          id="outlined-basic"
           label="Email"
+          error={this.state.error === "Input error, please check your data."}
           variant="outlined"
           name="email"
-          onChange={this.handleInputChange}
-          value={this.state.email}
+          onChange={this.handleChange}
           style={textfieldStyle}
         />
 
         <TextField
           type="password"
-          id="outlined-basic"
+          error={this.state.error === "Input error, please check your data."}
           label="Password"
           variant="outlined"
           name="password"
-          onChange={this.handleInputChange}
-          value={this.state.password}
+          onChange={this.handleChange}
           style={textfieldStyle}
         />
 
         <TextField
           type="password"
-          id="outlined-basic"
+          error={this.state.error === "Input error, please check your data."}
           label="Password Confirmation"
           variant="outlined"
           name="password_confirmation"
-          onChange={this.handleInputChange}
-          value={this.state.password_confirmation}
+          onChange={this.handleChange}
           style={textfieldStyle}
         />
 
         <TextField
           type="number"
-          id="outlined-basic"
+          error={this.state.error === "Input error, please check your data."}
           label="Zip Code"
           variant="outlined"
           name="zip_code"
-          onChange={this.handleInputChange}
+          onChange={this.handleChange}
           style={textfieldStyle}
         />
 
         <Button
+          type="submit"
           size="large"
-          onClick={this.handleSubmit}
           variant="contained"
           color="primary"
-          type="submit"
-          value="login"
-          style={{ backgroundColor: "#009fd9" }}
+          onClick={this.handleSubmit}
+          style={{ backgroundColor: "#4CAF50" }}
         >
           Create Account
         </Button>

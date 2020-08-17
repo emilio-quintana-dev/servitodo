@@ -1,5 +1,11 @@
-import React, { Component } from "react";
+//    Necessary Imports
+//----------x----------x---------
+import React from "react";
+//    Custom Components
+//----------x----------x---------
 import RegisterForm from "../components/RegisterForm";
+//    UI Components
+//----------x----------x---------
 import { Card, CardContent } from "@material-ui/core";
 
 const RegisterCard = (props) => {
