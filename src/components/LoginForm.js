@@ -1,13 +1,15 @@
 //    Necessary Imports
 //----------x----------x---------
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
+import axios from "axios";
 //    Store Actions
 //----------x----------x---------
 import { loginSuccess } from "../actions/auth";
 import { connect } from "react-redux";
 //    UI Components
 //----------x----------x---------
-import { FormGroup, TextField, Button } from "@material-ui/core";
+import { FormGroup, TextField, Button, makesStyles } from "@material-ui/core";
 
 class LoginForm extends Component {
   constructor() {
@@ -27,33 +29,34 @@ class LoginForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const reqObj = {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
+    const { loginSuccess, history } = this.props;
+    const self = this;
+    axios
+      .post("http://localhost:3001/auth", {
         email: this.state.email,
         password: this.state.password,
-      }),
-    };
-
-    fetch("http://localhost:3001/auth", reqObj)
-      .then((resp) => resp.json())
-      .then((data) => {
-        if (data.error) {
-          this.setState({
+      })
+      .then(function (response) {
+        if (response.data.error) {
+          console.log(response.data.error);
+          self.setState({
             email: "",
             password: "",
-            error: "Invalid Username or password",
+            error: response.data.error,
           });
         } else {
-          localStorage.setItem("token", data.token);
-          this.props.loginSuccess(data);
-          this.props.history.push("/search");
+          localStorage.setItem("token", response.data.token);
+          loginSuccess(response.data);
+          history.push("/search");
         }
+      })
+      .catch(function (error) {
+        console.log(error);
       });
   };
 
   render() {
+    console.log("State", this.state);
     const textfieldStyle = { paddingBottom: 20 };
 
     return (
@@ -101,4 +104,4 @@ class LoginForm extends Component {
   }
 }
 
-export default connect(null, { loginSuccess })(LoginForm);
+export default withRouter(connect(null, { loginSuccess })(LoginForm));

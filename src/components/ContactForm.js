@@ -5,6 +5,7 @@ import EmailPro from "../components/EmailPro";
 class ContactForm extends Component {
   state = {
     message: "",
+    showSnackbar: false,
   };
 
   handleInputChange = (e) => {
@@ -13,21 +14,34 @@ class ContactForm extends Component {
     });
   };
 
+  emailSent = () => {
+    this.setState({
+      showSnackbar: true,
+    });
+  };
+
   render() {
     return (
-      <FormGroup>
-        <TextField
-          autoFocus
-          id="outlined-basic"
-          label="Message"
-          variant="outlined"
-          name="message"
-          onChange={this.handleInputChange}
-          value={this.state.message}
-          style={{ marginTop: 10, marginBottom: 10 }}
-        />
-        <EmailPro email={this.props.email} message={this.state.message} />
-      </FormGroup>
+      <div>
+        <FormGroup>
+          <TextField
+            autoFocus
+            id="outlined-basic"
+            label="Message"
+            variant="outlined"
+            name="message"
+            onChange={this.handleInputChange}
+            value={this.state.message}
+            style={{ marginTop: 10, marginBottom: 10 }}
+          />
+          <EmailPro
+            email={this.props.email}
+            message={this.state.message}
+            toggleContactForm={this.props.toggleContactForm}
+            emailSent={this.props.emailSent}
+          />
+        </FormGroup>
+      </div>
     );
   }
 }

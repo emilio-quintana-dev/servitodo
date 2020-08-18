@@ -16,7 +16,6 @@ import Footer from "./components/Footer";
 import ReviewContainer from "./components/ReviewContainer";
 //    Styling
 //----------x----------x---------
-import "./App.css";
 import { CssBaseline } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 //    Stripe Components
@@ -35,7 +34,7 @@ function App() {
       <Elements stripe={stripePromise}>
         <div className="App">
           <div id="page-container">
-            <Alert severity="success" style={{ fontFamily: "Montserrat" }}>
+            <Alert severity="info" color="success">
               Welcome! Servitodo was built to help people affected by COVID-19.
             </Alert>
             <Navbar />

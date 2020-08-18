@@ -6,20 +6,22 @@ import React from "react";
 import LoginForm from "../components/LoginForm";
 //    UI Components
 //----------x----------x---------
-import { Card, CardContent, Divider, Typography } from "@material-ui/core";
+import { Card, CardContent, makeStyles } from "@material-ui/core";
 
-//    ***Need to import makeStyles
-//----------x----------x---------
-const LoginCard = (props) => {
-  const cardStyle = { padding: "20px", margin: "20px" };
+const useStyles = makeStyles((theme) => ({
+  card: {
+    padding: 20,
+    margin: 20,
+  },
+}));
+
+export default function LoginCard() {
+  const classes = useStyles();
   return (
-    <Card style={cardStyle}>
+    <Card className={classes.card}>
       <CardContent>
-        <LoginForm history={props.history} />
-        {/* OR register */}
+        <LoginForm />
       </CardContent>
     </Card>
   );
-};
-
-export default LoginCard;
+}

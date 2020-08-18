@@ -11,20 +11,16 @@ import { CssBaseline, Typography, Container } from "@material-ui/core";
 //----------x----------x---------
 import LoginCard from "../components/LoginCard";
 
-class Login extends React.Component {
-  render() {
-    return (
-      <React.Fragment>
-        <CssBaseline />
-        <Container maxWidth="sm">
-          <Typography variant="h4" style={{ textAlign: "center" }}>
-            Welcome Back
-          </Typography>
-          <LoginCard history={this.props.history} />
-        </Container>
-      </React.Fragment>
-    );
-  }
+export default function Login() {
+  return (
+    <React.Fragment>
+      <CssBaseline />
+      <Container maxWidth="sm">
+        <Typography variant="h4" style={{ textAlign: "center" }}>
+          Welcome Back
+        </Typography>
+        <LoginCard />
+      </Container>
+    </React.Fragment>
+  );
 }
-
-export default Login;

@@ -8,14 +8,16 @@ import {
   Typography,
   Grid,
   CssBaseline,
-  Divider,
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import WelcomeSnackbar from "../components/WelcomeSnackbar";
+import { updateQuery } from "../actions/professionals";
 
 class Dashboard extends React.Component {
   componentDidMount() {
-    this.checkForToken();
+    if (!this.props.auth) {
+      this.checkForToken();
+    }
   }
 
   checkForToken = () => {
@@ -43,78 +45,54 @@ class Dashboard extends React.Component {
     }
   };
 
+  handleClick = (event) => {
+    this.props.updateQuery(event.target.innerText.toLowerCase());
+    this.props.history.push("/results");
+  };
+
   render() {
+    const textStyle = {
+      borderBottom: "2px solid #4CAF50",
+      width: 80,
+      fontSize: "15px",
+      marginBottom: 10,
+    };
+
+    const buttonStyle = {
+      backgroundColor: "#4CAF50",
+      color: "white",
+      margin: 20,
+      padding: 10,
+    };
     return (
-      <Container maxWidth="lg" style={{ marginTop: 80 }}>
-        <WelcomeSnackbar />
+      <Container maxWidth="lg" style={{ marginTop: 150 }}>
+        {/* <WelcomeSnackbar /> */}
         <CssBaseline />
-        <Typography
-          variant="h6"
-          style={{
-            borderBottom: "2px solid #4CAF50",
-            width: 80,
-            fontFamily: "Montserrat",
-            fontSize: "15px",
-            marginBottom: 10,
-          }}
-        >
+        <Typography variant="h6" style={textStyle}>
           Hire a pro
         </Typography>
 
         <Grid container>
           <Grid item xs={10}>
-            <Typography variant="h3" style={{ fontFamily: "Montserrat" }}>
-              Find local professionals for
-            </Typography>
-            <Typography
-              variant="h3"
-              style={{ marginBottom: 30, fontFamily: "Montserrat" }}
-            >
+            <Typography variant="h3">Find local professionals for</Typography>
+            <Typography variant="h3" style={{ marginBottom: 30 }}>
               pretty much everything.
             </Typography>
             <SearchBar />
 
-            <Button
-              style={{
-                backgroundColor: "#4CAF50",
-                color: "white",
-                margin: 20,
-                padding: 10,
-              }}
-            >
-              Personal Trainers
+            <Button onClick={this.handleClick} style={buttonStyle}>
+              Personal Trainer
             </Button>
 
-            <Button
-              style={{
-                backgroundColor: "#4CAF50",
-                color: "white",
-                margin: 20,
-                padding: 10,
-              }}
-            >
+            <Button onClick={this.handleClick} style={buttonStyle}>
               Electricians
             </Button>
 
-            <Button
-              style={{
-                backgroundColor: "#4CAF50",
-                color: "white",
-                margin: 20,
-                padding: 10,
-              }}
-            >
+            <Button onClick={this.handleClick} style={buttonStyle}>
               App Developers
             </Button>
 
-            <Button
-              style={{
-                backgroundColor: "#4CAF50",
-                color: "white",
-                margin: 20,
-                padding: 10,
-              }}
-            >
+            <Button onClick={this.handleClick} style={buttonStyle}>
               House Cleaners
             </Button>
           </Grid>
@@ -127,7 +105,6 @@ class Dashboard extends React.Component {
               style={{
                 backgroundColor: "#4CAF50",
                 color: "white",
-                display: "inline",
                 marginTop: 142,
                 height: 55,
                 marginLeft: 10,
@@ -148,4 +125,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { currentUser })(Dashboard);
+export default connect(mapStateToProps, { currentUser, updateQuery })(
+  Dashboard
+);

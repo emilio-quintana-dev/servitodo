@@ -13,7 +13,7 @@ import {
   Menu,
   MenuItem,
 } from "@material-ui/core";
-
+import Avatar from "@material-ui/core/Avatar";
 //    Store Actions
 //----------x----------x---------
 import { logoutUser } from "../actions/auth";
@@ -21,7 +21,7 @@ import { updateQuery } from "../actions/professionals";
 //    Misc
 //----------x----------x---------
 import Logo from "../logo.png";
-
+import ProfilePic from "../profilePic.jpeg";
 //    Custom Styling
 //----------x----------x---------
 const useStyles = makeStyles((theme) => ({
@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
   menuButton: {
     color: "#757575",
-    marginRight: theme.spacing(3),
+    marginRight: theme.spacing(2),
   },
   button: {
     color: "white",
@@ -43,6 +43,9 @@ const useStyles = makeStyles((theme) => ({
   },
   navBar: {
     backgroundColor: "white",
+  },
+  menu: {
+    display: "flex",
   },
 }));
 
@@ -56,7 +59,7 @@ function Navbar(props) {
   const handleLogout = () => {
     localStorage.removeItem("token");
     props.logoutUser();
-    props.history.push("/login");
+    history.push("/login");
   };
 
   const handleClick = (event) => {
@@ -71,16 +74,16 @@ function Navbar(props) {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" elevation={0} className={classes.navBar}>
+      <AppBar position="relative" elevation={0} className={classes.navBar}>
         <Toolbar>
           <div className={classes.logo}>
             <Link to="/search">
-              <img width="50" height="50" src={Logo} />
+              <img width="40" height="40" src={Logo} />
             </Link>
           </div>
 
           {props.auth ? (
-            <div>
+            <div className={classes.menu}>
               <Button
                 className={classes.menuButton}
                 aria-controls="simple-menu"
@@ -96,7 +99,7 @@ function Navbar(props) {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Personal Trainers</MenuItem>
+                <MenuItem onClick={handleClose}>Personal Trainer</MenuItem>
                 <MenuItem onClick={handleClose}>Electricians</MenuItem>
                 <MenuItem onClick={handleClose}>App Developers</MenuItem>
                 <MenuItem onClick={handleClose}>House Cleaners</MenuItem>
@@ -113,6 +116,7 @@ function Navbar(props) {
               <Button className={classes.menuButton} onClick={handleLogout}>
                 Logout
               </Button>
+              <Avatar src={ProfilePic}></Avatar>
             </div>
           ) : (
             <div>

@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 //                     UI Components
 // ---------------x--------------------x---------------
-import { TextField, Button } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
 //                        Actions
 // ---------------x--------------------x---------------
 import { updateQuery } from "../actions/professionals";

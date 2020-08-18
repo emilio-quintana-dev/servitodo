@@ -111,7 +111,7 @@ class CheckoutForm extends React.Component {
     } else {
       // Show a success message
       console.log("SUCCESS", serverResponse);
-      // this.props.props.history.push("/success");
+      this.props.props.history.push("/jobs");
     }
   };
 
@@ -163,7 +163,7 @@ class CheckoutForm extends React.Component {
                   autofocus
                   helperText="Please enter the amount of hours you agreed to."
                   type="number"
-                  label="Quantity"
+                  label="Hours agreed"
                   variant="outlined"
                   name="quantity"
                   onChange={this.handleQtyChange}
@@ -172,7 +172,9 @@ class CheckoutForm extends React.Component {
 
                 <CardElement onChange={this.handleCardChange} />
                 {this.state.quantity < 1 ? null : (
-                  <Typography>Total: ${this.state.total}</Typography>
+                  <Typography variant="textSecondary" style={{ marginTop: 20 }}>
+                    Total: ${this.state.total}
+                  </Typography>
                 )}
 
                 <Button

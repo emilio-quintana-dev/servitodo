@@ -3,7 +3,7 @@
 import React, { Component } from "react";
 //    UI Components
 //----------x----------x---------
-import { FormGroup, TextField, Button } from "@material-ui/core";
+import { FormGroup, TextField, Button, Typography } from "@material-ui/core";
 //    Store Actions
 //----------x----------x---------
 import { loginSuccess } from "../actions/auth";
@@ -138,6 +138,19 @@ class RegisterForm extends Component {
         >
           Create Account
         </Button>
+
+        <Typography
+          variant="textSecondary"
+          style={{
+            color: "grey",
+            marginTop: 10,
+            textAlign: "center",
+            fontFamily: "Montserrat",
+            fontSize: "10px",
+          }}
+        >
+          By clicking 'register' you accept all terms and conditions.
+        </Typography>
       </FormGroup>
     );
   }

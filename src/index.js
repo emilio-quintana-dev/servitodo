@@ -14,7 +14,7 @@ const store = createStore(
 
 const theme = createMuiTheme({
   typography: {
-    fontFamily: `"Roboto", "Helvetica", "Arial", sans-serif`,
+    fontFamily: `"Montserrat", "Roboto", "Helvetica", "Arial", sans-serif`,
     fontSize: 14,
     fontWeightLight: 300,
     fontWeightRegular: 400,

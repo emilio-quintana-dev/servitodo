@@ -17,7 +17,7 @@ import {
 //    Custom Components
 //----------x----------x---------
 import ActiveJobCard from "../components/ActiveJobCard";
-import RadioFilters from "../components/RadioFilters";
+import RadioFiltersJobs from "../components/RadioFiltersJobs";
 //    Under Construction: Users will be able
 //    to mark jobs as done, leave a review and
 //    pay the pro.
@@ -77,8 +77,38 @@ class ActiveJobs extends Component {
   };
 
   renderActiveJobs = () => {
-    return this.state.activeJobs.map((job, idx) => {
-      return <ActiveJobCard job={job} key={idx} />;
+    let filteredJobs = [];
+    if (this.props.filter === "completed") {
+      filteredJobs = this.state.activeJobs.filter(
+        (job, idx) => job.status === "Complete"
+      );
+    } else if (this.props.filter === "pending") {
+      filteredJobs = this.state.activeJobs.filter(
+        (job, idx) => job.status === "Pending"
+      );
+    } else {
+      filteredJobs = this.state.activeJobs;
+    }
+
+    return filteredJobs.map((job, idx) => {
+      console.log("Job", job);
+      return (
+        <ActiveJobCard job={job} key={idx} setAsComplete={this.setAsComplete} />
+      );
+    });
+  };
+
+  setAsComplete = (jobObj) => {
+    const updatedActiveJobs = this.state.activeJobs.map((job) => {
+      if (job.id === jobObj.id) {
+        return jobObj;
+      } else {
+        return job;
+      }
+    });
+
+    this.setState({
+      activeJobs: updatedActiveJobs,
     });
   };
 
@@ -92,8 +122,8 @@ class ActiveJobs extends Component {
         <Grid container style={{ padding: "1.5%" }} spacing={2}>
           <Grid item xs={2}>
             <Paper style={{ padding: 20 }}>
-              <Typography>Sort by:</Typography>
-              <RadioFilters />
+              <Typography>Show:</Typography>
+              <RadioFiltersJobs />
             </Paper>
           </Grid>
           <Grid item xs={10}>
@@ -108,6 +138,7 @@ class ActiveJobs extends Component {
 const mapStateToProps = (state) => {
   return {
     auth: state.auth,
+    filter: state.filter,
   };
 };
 

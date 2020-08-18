@@ -104,7 +104,11 @@ export default function ProCard(props) {
           <Grid item sm container>
             <Grid item xs={10} container direction="column">
               <Grid item>
-                <Typography gutterBottom variant="h5">
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  style={{ fontWeight: "bold" }}
+                >
                   {" "}
                   {name}
                 </Typography>
@@ -127,7 +131,7 @@ export default function ProCard(props) {
               </Grid>
             </Grid>
             <Grid item>
-              <Typography variant="subtitle1">
+              <Typography variant="subtitle1" style={{ fontWeight: "bold" }}>
                 ${estimated_cost}/hour
               </Typography>
               <Typography variant="body2" color="textSecondary">

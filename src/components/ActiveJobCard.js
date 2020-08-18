@@ -9,13 +9,8 @@ import {
 } from "@material-ui/core";
 
 class ActiveJobCard extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      status: props.job.status,
-      isCheckout: true,
-    };
+  constructor() {
+    super();
   }
 
   renderStars = (averageReviews) => {
@@ -76,7 +71,7 @@ class ActiveJobCard extends Component {
     fetch(`http://localhost:3001/jobs/${jobId}`, configObj)
       .then((response) => response.json())
       .then((response) => {
-        this.setState({ status: "Complete" });
+        this.props.setAsComplete(response);
       })
       .catch((error) => console.log(error.message));
   };
@@ -101,6 +96,7 @@ class ActiveJobCard extends Component {
   };
 
   render() {
+    console.log("State", this.state);
     const {
       id,
       title,
@@ -109,7 +105,6 @@ class ActiveJobCard extends Component {
       professional_id,
       professional_img,
       professional_name,
-      professional_average_rating,
     } = this.props.job;
 
     const paper = { padding: "2%", marginBottom: 20 };
@@ -127,7 +122,11 @@ class ActiveJobCard extends Component {
       marginTop: 10,
       marginRight: 10,
     };
-    const cancelButton = { color: "white", backgroundColor: "red" };
+    const cancelButton = {
+      color: "white",
+      backgroundColor: "red",
+      marginTop: 10,
+    };
 
     return (
       <React.Fragment>
@@ -141,7 +140,7 @@ class ActiveJobCard extends Component {
             </Grid>
 
             <Grid item sm container>
-              <Grid item xs={10} container direction="column" spacing={1}>
+              <Grid item xs={10} container direction="column">
                 <Grid item>
                   <Typography gutterBottom variant="h5">
                     {professional_name}
@@ -149,19 +148,33 @@ class ActiveJobCard extends Component {
                 </Grid>
 
                 <Grid item>
-                  <Typography>{title}</Typography>
+                  <Typography>Description: {title}</Typography>
                 </Grid>
 
                 <Grid item>
-                  {this.renderStars(professional_average_rating)}
-                </Grid>
-
-                <Grid item>
-                  <Typography>{this.state.status}</Typography>
+                  <Typography>Status: {status}</Typography>
                 </Grid>
               </Grid>
 
-              {this.state.status === "Complete" ? (
+              {status === "Pending" ? (
+                <Grid item>
+                  <Button
+                    onClick={this.handleComplete}
+                    style={doneButton}
+                    variant="contained"
+                  >
+                    Done
+                  </Button>
+
+                  <Button
+                    onClick={this.handleDelete}
+                    style={cancelButton}
+                    variant="contained"
+                  >
+                    Cancel
+                  </Button>
+                </Grid>
+              ) : (
                 <Grid item>
                   <Button
                     href={`/jobs/${id}/review/${professional_id}`}
@@ -179,25 +192,6 @@ class ActiveJobCard extends Component {
                   >
                     Pay
                   </Button>
-                </Grid>
-              ) : (
-                <Grid item>
-                  <Button
-                    onClick={this.handleComplete}
-                    style={doneButton}
-                    variant="contained"
-                    style={doneButton}
-                  >
-                    Done
-                  </Button>
-
-                  {/* <Button
-                    onClick={this.handleDelete}
-                    style={cancelButton}
-                    variant="contained"
-                  >
-                    Cancel
-                  </Button> */}
                 </Grid>
               )}
             </Grid>

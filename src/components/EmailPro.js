@@ -15,6 +15,8 @@ export default function EmailPro(props) {
 
   function sendEmail() {
     emailjs.send(service_id, template_id, template_params, user_id);
+    props.toggleContactForm();
+    props.emailSent();
   }
 
   return (
