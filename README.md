@@ -47,7 +47,7 @@ https://www.loom.com/share/0782c7ff097e49c3ab2d8b0e3e2b8817
 ```
 git clone git@github.com:emilio-quintana-dev/servitodo-client.git
 cd servitodo-client
-npm install & npm start dev
+npm install && npm start dev
 ```
 
 # License 
