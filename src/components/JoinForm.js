@@ -6,10 +6,10 @@ class JoinForm extends Component {
     super();
 
     this.categories = [
-      { value: "Homecraft", label: "Homecraft" },
-      { value: "Health and Fitness", label: "Health and Fitness" },
-      { value: "Massage Therapy", label: "Massage Therapy" },
-      { value: "Local Moving", label: "Local Moving" },
+      { value: "Personal Trainers", label: "Personal Trainers" },
+      { value: "Electricians", label: "Electricians" },
+      { value: "App Developers", label: "App Developers" },
+      { value: "House Cleaners", label: "House Cleaners" },
     ];
 
     this.state = {
@@ -45,7 +45,7 @@ class JoinForm extends Component {
       body: JSON.stringify(this.state),
     };
 
-    fetch("http://localhost:3001/professionals", reqObj)
+    fetch("https://shrouded-retreat-77877.herokuapp.com/professionals", reqObj)
       .then((resp) => resp.json())
       .then((data) => {
         if (data.error) {
@@ -65,7 +65,7 @@ class JoinForm extends Component {
           autoFocus
           label="Name"
           variant="outlined"
-          name="Name"
+          name="name"
           onChange={this.handleChange}
           value={this.state.name}
           style={textfieldStyle}

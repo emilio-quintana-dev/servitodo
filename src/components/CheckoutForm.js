@@ -30,7 +30,7 @@ class CheckoutForm extends React.Component {
   componentDidMount() {
     this.checkForToken();
     const proId = this.props.props.match.params.professionalId;
-    fetch(`http://localhost:3001/professionals/${proId}`)
+    fetch(`https://shrouded-retreat-77877.herokuapp.com/professionals/${proId}`)
       .then((response) => response.json())
       .then((response) => {
         this.setState({
@@ -52,7 +52,7 @@ class CheckoutForm extends React.Component {
         },
       };
 
-      fetch("http://localhost:3001/current_user", reqObj)
+      fetch("https://shrouded-retreat-77877.herokuapp.com/current_user", reqObj)
         .then((response) => response.json())
         .then((response) => {
           if (response.error) {
@@ -88,14 +88,17 @@ class CheckoutForm extends React.Component {
       // show `result.error.message` in the payment form.
     } else {
       // Otherwise send paymentMethod.id to your server (see Step 3)
-      const response = await fetch("http://localhost:3001/pay", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          payment_method_id: result.paymentMethod.id,
-          amount: this.state.total,
-        }),
-      });
+      const response = await fetch(
+        "https://shrouded-retreat-77877.herokuapp.com/pay",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            payment_method_id: result.paymentMethod.id,
+            amount: this.state.total,
+          }),
+        }
+      );
 
       const serverResponse = await response.json();
 
@@ -107,10 +110,9 @@ class CheckoutForm extends React.Component {
     if (serverResponse.error) {
       // An error happened when charging the card,
       // show the error in the payment form.
-      console.log("ERROR", serverResponse);
     } else {
       // Show a success message
-      console.log("SUCCESS", serverResponse);
+
       this.props.props.history.push("/jobs");
     }
   };

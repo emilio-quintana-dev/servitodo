@@ -25,7 +25,7 @@ class JobForm extends Component {
       body: JSON.stringify(job),
     };
 
-    fetch("http://localhost:3001/jobs", reqObj)
+    fetch("https://shrouded-retreat-77877.herokuapp.com/jobs", reqObj)
       .then((resp) => resp.json())
       .then((data) => {
         if (data.error) {

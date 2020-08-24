@@ -54,7 +54,7 @@ class ActiveJobs extends Component {
         },
       };
 
-      fetch("http://localhost:3001/current_user", reqObj)
+      fetch("https://shrouded-retreat-77877.herokuapp.com/current_user", reqObj)
         .then((response) => response.json())
         .then((user) => {
           if (user.error) {
@@ -70,7 +70,7 @@ class ActiveJobs extends Component {
     if (this.props.auth) {
       const userId = this.props.auth.id;
 
-      fetch(`http://localhost:3001/users/${userId}/jobs`)
+      fetch(`https://shrouded-retreat-77877.herokuapp.com/users/${userId}/jobs`)
         .then((response) => response.json())
         .then((response) => this.setState({ activeJobs: response }));
     }

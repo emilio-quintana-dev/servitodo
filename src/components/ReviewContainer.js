@@ -30,7 +30,7 @@ class ReviewContainer extends React.Component {
         },
       };
 
-      fetch("http://localhost:3001/current_user", reqObj)
+      fetch("https://shrouded-retreat-77877.herokuapp.com/current_user", reqObj)
         .then((response) => response.json())
         .then((response) => {
           if (response.error) {

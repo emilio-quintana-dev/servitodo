@@ -14,7 +14,7 @@ import ActiveJobs from "./components/ActiveJobs";
 import Join from "./components/Join";
 import Footer from "./components/Footer";
 import ReviewContainer from "./components/ReviewContainer";
-//    Styling
+//    UI Components
 //----------x----------x---------
 import { CssBaseline } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";

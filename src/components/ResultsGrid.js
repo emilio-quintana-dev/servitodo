@@ -51,6 +51,10 @@ function ResultsGrid(props) {
       filteredPros = filteredPros.sort((a, b) =>
         a.estimated_cost > b.estimated_cost ? 1 : -1
       );
+    } else if (props.filter === "rating") {
+      filteredPros = filteredPros.sort((a, b) =>
+        b.average_reviews > a.average_reviews ? 1 : -1
+      );
     }
 
     if (filteredPros.length !== 0) {

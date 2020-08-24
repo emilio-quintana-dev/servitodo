@@ -9,7 +9,15 @@ import { loginSuccess } from "../actions/auth";
 import { connect } from "react-redux";
 //    UI Components
 //----------x----------x---------
-import { FormGroup, TextField, Button, makesStyles } from "@material-ui/core";
+import {
+  FormGroup,
+  TextField,
+  Button,
+  makesStyles,
+  Checkbox,
+} from "@material-ui/core";
+
+const api = "https://shrouded-retreat-77877.herokuapp.com/";
 
 class LoginForm extends Component {
   constructor() {
@@ -32,7 +40,7 @@ class LoginForm extends Component {
     const { loginSuccess, history } = this.props;
     const self = this;
     axios
-      .post("http://localhost:3001/auth", {
+      .post(api + "auth", {
         email: this.state.email,
         password: this.state.password,
       })
@@ -56,7 +64,6 @@ class LoginForm extends Component {
   };
 
   render() {
-    console.log("State", this.state);
     const textfieldStyle = { paddingBottom: 20 };
 
     return (
@@ -88,6 +95,12 @@ class LoginForm extends Component {
           onChange={this.handleChange}
           style={textfieldStyle}
         />
+
+        {/* <Checkbox
+          defaultChecked
+          color="primary"
+          inputProps={{ "aria-label": "secondary checkbox" }}
+        /> */}
 
         <Button
           type="submit"

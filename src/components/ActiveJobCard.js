@@ -68,7 +68,10 @@ class ActiveJobCard extends Component {
       body: JSON.stringify({ id: jobId }),
     };
 
-    fetch(`http://localhost:3001/jobs/${jobId}`, configObj)
+    fetch(
+      `https://shrouded-retreat-77877.herokuapp.com/jobs/${jobId}`,
+      configObj
+    )
       .then((response) => response.json())
       .then((response) => {
         this.props.setAsComplete(response);
@@ -87,7 +90,10 @@ class ActiveJobCard extends Component {
       body: JSON.stringify({ id: jobId }),
     };
 
-    fetch(`http://localhost:3001/jobs/${jobId}`, configObj)
+    fetch(
+      `https://shrouded-retreat-77877.herokuapp.com/jobs/${jobId}`,
+      configObj
+    )
       .then((response) => response.json())
       .then((response) => {
         console.log(response);
@@ -96,7 +102,6 @@ class ActiveJobCard extends Component {
   };
 
   render() {
-    console.log("State", this.state);
     const {
       id,
       title,
@@ -105,6 +110,7 @@ class ActiveJobCard extends Component {
       professional_id,
       professional_img,
       professional_name,
+      professional_average_rating,
     } = this.props.job;
 
     const paper = { padding: "2%", marginBottom: 20 };
@@ -145,6 +151,10 @@ class ActiveJobCard extends Component {
                   <Typography gutterBottom variant="h5">
                     {professional_name}
                   </Typography>
+                </Grid>
+
+                <Grid item>
+                  {this.renderStars(professional_average_rating)}
                 </Grid>
 
                 <Grid item>

@@ -33,7 +33,7 @@ class Dashboard extends React.Component {
         },
       };
 
-      fetch("http://localhost:3001/current_user", reqObj)
+      fetch("https://shrouded-retreat-77877.herokuapp.com/current_user", reqObj)
         .then((response) => response.json())
         .then((response) => {
           if (response.error) {
@@ -66,7 +66,7 @@ class Dashboard extends React.Component {
     };
     return (
       <Container maxWidth="lg" style={{ marginTop: 150 }}>
-        {/* <WelcomeSnackbar /> */}
+        <WelcomeSnackbar />
         <CssBaseline />
         <Typography variant="h6" style={textStyle}>
           Hire a pro

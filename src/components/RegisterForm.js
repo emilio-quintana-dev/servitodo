@@ -3,7 +3,7 @@
 import React, { Component } from "react";
 //    UI Components
 //----------x----------x---------
-import { FormGroup, TextField, Button, Typography } from "@material-ui/core";
+import { FormGroup, TextField, Button } from "@material-ui/core";
 //    Store Actions
 //----------x----------x---------
 import { loginSuccess } from "../actions/auth";
@@ -44,7 +44,7 @@ class RegisterForm extends Component {
       }),
     };
 
-    fetch("http://localhost:3001/register", reqObj)
+    fetch("https://shrouded-retreat-77877.herokuapp.com/register", reqObj)
       .then((resp) => resp.json())
       .then((data) => {
         if (data.error) {
@@ -54,7 +54,6 @@ class RegisterForm extends Component {
             password: "",
             password_confirmation: "",
             zip_code: "",
-            error: "",
             error: "Input error, please check your data.",
           });
         } else {
@@ -138,19 +137,6 @@ class RegisterForm extends Component {
         >
           Create Account
         </Button>
-
-        <Typography
-          variant="textSecondary"
-          style={{
-            color: "grey",
-            marginTop: 10,
-            textAlign: "center",
-            fontFamily: "Montserrat",
-            fontSize: "10px",
-          }}
-        >
-          By clicking 'register' you accept all terms and conditions.
-        </Typography>
       </FormGroup>
     );
   }

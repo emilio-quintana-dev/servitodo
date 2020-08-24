@@ -27,7 +27,7 @@ class ShowPro extends Component {
 
   fetchProData = () => {
     const id = parseInt(this.props.match.params.professionalId);
-    fetch(`http://localhost:3001/professionals/${id}`)
+    fetch(`https://shrouded-retreat-77877.herokuapp.com/professionals/${id}`)
       .then((response) => response.json())
       .then((response) =>
         this.setState({
@@ -50,7 +50,7 @@ class ShowPro extends Component {
         },
       };
 
-      fetch("http://localhost:3001/current_user", reqObj)
+      fetch("https://shrouded-retreat-77877.herokuapp.com/current_user", reqObj)
         .then((response) => response.json())
         .then((user) => {
           if (user.error) {
@@ -154,7 +154,7 @@ class ShowPro extends Component {
                 width="256"
                 height="256"
                 alt="complex"
-                style={{ borderRadius: "50%", margin: "20px" }}
+                style={{ borderRadius: "50%", marginRight: 20 }}
                 src={img_url}
               />
             </Grid>

@@ -47,6 +47,9 @@ const useStyles = makeStyles((theme) => ({
   menu: {
     display: "flex",
   },
+  profilePic: {
+    border: "1px solid green",
+  },
 }));
 
 //    Functional Component Navbar
@@ -116,7 +119,10 @@ function Navbar(props) {
               <Button className={classes.menuButton} onClick={handleLogout}>
                 Logout
               </Button>
-              <Avatar src={ProfilePic}></Avatar>
+              <Avatar
+                className={classes.profilePic}
+                src={props.auth.img_url}
+              ></Avatar>
             </div>
           ) : (
             <div>

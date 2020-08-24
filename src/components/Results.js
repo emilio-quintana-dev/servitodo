@@ -21,7 +21,7 @@ class Results extends Component {
   }
 
   fetchProData = () => {
-    fetch("http://localhost:3001/professionals")
+    fetch("https://shrouded-retreat-77877.herokuapp.com/professionals")
       .then((response) => response.json())
       .then((response) => this.props.fetchSuccess(response.professionals));
   };
@@ -39,7 +39,7 @@ class Results extends Component {
         },
       };
 
-      fetch("http://localhost:3001/current_user", reqObj)
+      fetch("https://shrouded-retreat-77877.herokuapp.com/current_user", reqObj)
         .then((response) => response.json())
         .then((user) => {
           if (user.error) {

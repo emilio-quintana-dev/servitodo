@@ -41,7 +41,7 @@ class ReviewForm extends Component {
       }),
     };
 
-    fetch("http://localhost:3001/reviews", reqObj)
+    fetch("https://shrouded-retreat-77877.herokuapp.com/reviews", reqObj)
       .then((resp) => resp.json())
       .then((data) => {
         if (data.error) {

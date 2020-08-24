@@ -48,6 +48,11 @@ function RadioFilters(props) {
           control={<GreenRadio />}
           label="Price"
         />
+        <FormControlLabel
+          value="rating"
+          control={<GreenRadio />}
+          label="Rating"
+        />
       </RadioGroup>
     </FormControl>
   );

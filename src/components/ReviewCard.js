@@ -21,7 +21,7 @@ class ReviewCard extends Component {
 
   componentDidMount() {
     const proId = this.props.match.params.professionalId;
-    fetch(`http://localhost:3001/professionals/${proId}`)
+    fetch(`https://shrouded-retreat-77877.herokuapp.com/professionals/${proId}`)
       .then((response) => response.json())
       .then((response) => {
         this.setState({
