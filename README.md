@@ -40,7 +40,7 @@ https://www.loom.com/share/0782c7ff097e49c3ab2d8b0e3e2b8817
 * Implemented user interface employing React and Redux with Material UI for styling.
 * Utilized Stripe Elements to enable credit card payments.
 
-* Currently working on deploying both backend (https://github.com/emilio-quintana-dev/servitodo-api) and frontend to Heroku.
+* Link to backend (https://github.com/emilio-quintana-dev/servitodo-api).
 
 # Installation
 
