@@ -1,14 +1,14 @@
-This project is the MVP for a personal project called Servitodo. The goal of the app is to help professionals in under-developed countries that have been affected by COVID-19 get leads to jobs. If you would like to see me demo the app click [here](https://www.loom.com/share/0782c7ff097e49c3ab2d8b0e3e2b8817)
+This project is the MVP for a personal project called Servitodo. The goal of the app is to help professionals in under-developed countries that have been affected by COVID-19 get leads to jobs. If you would like to see me demo the app click [here](https://www.loom.com/share/0782c7ff097e49c3ab2d8b0e3e2b8817). Feel free to checkout the [back-end](https://github.com/emilio-quintana-dev/servitodo-api) as well.
 
 # User Stories
 
 Users can:
-- Login / Sign-up
-- Search for services based on keywords
-- See results based on zip-code and keyword combination
-- Email professionals
-- Hire professionals
-- Pay professionals with credit cards
+- Login / Sign-up.
+- Search for services based on keywords.
+- See results based on zip-code and keyword combination.
+- Email professionals.
+- Hire professionals.
+- Pay professionals with credit cards.
 
 
 # Screenshots 
@@ -28,8 +28,6 @@ Users can:
 - Implemented user interface employing React and Redux with Material UI for styling.
 - Utilized Stripe Elements to enable credit card payments.
 
-# Tech Stack (Front-end)
-- React & Redux and Material UI
-
-Feel free to checkout the [back-end](https://github.com/emilio-quintana-dev/servitodo-api) as well.
+# Tech Stack 
+- React & Redux and Material UI.
 
