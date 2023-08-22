@@ -13,13 +13,13 @@ Users can:
 
 # Screenshots 
 
-![Image of Login Screen](https://github.com/emilio-quintana-dev/servitodo-client/blob/master/screenshots/login.png)
-![Image of Dashboard](https://github.com/emilio-quintana-dev/servitodo-client/blob/master/screenshots/search.png)
+![Image of Login Screen](https://github.com/emilio-quintana-dev/servitodo/blob/master/screenshots/login.png)
+![Image of Dashboard](https://github.com/emilio-quintana-dev/servitodo/blob/master/screenshots/search.png)
 ![Image of Expandable](https://github.com/emilio-quintana-dev/servitodo-client/blob/master/screenshots/results.png)
-![Image of Edit Screen](https://github.com/emilio-quintana-dev/servitodo-client/blob/master/screenshots/profile.png)
-![Image of New Screen](https://github.com/emilio-quintana-dev/servitodo-client/blob/master/screenshots/jobs.png)
-![Image of Search Results](https://github.com/emilio-quintana-dev/servitodo-client/blob/master/screenshots/reviews.png)
-![Image of MailJS Generated Email](https://github.com/emilio-quintana-dev/servitodo-client/blob/master/screenshots/pay.png)
+![Image of Edit Screen](https://github.com/emilio-quintana-dev/servitodo/blob/master/screenshots/profile.png)
+![Image of New Screen](https://github.com/emilio-quintana-dev/servitodo/blob/master/screenshots/jobs.png)
+![Image of Search Results](https://github.com/emilio-quintana-dev/servitodo/blob/master/screenshots/reviews.png)
+![Image of MailJS Generated Email](https://github.com/emilio-quintana-dev/servitodo/blob/master/screenshots/pay.png)
 
 # Features 
 - Implemented React Router to enable client side rendering and optimized performance.
